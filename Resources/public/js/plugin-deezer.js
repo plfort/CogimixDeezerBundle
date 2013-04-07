@@ -84,13 +84,13 @@ $(document).ready(function(){
 	
 	$("#playlist-container").on('click','.playPlaylistDeezerBtn',function(event){
 		
-		$.get(Routing.generate('_grooveshark_playlist_songs',{'id':$(this).closest('.gs-playlist-item').data('id')}),function(response){
+		$.get(Routing.generate('_deezer_playlist_songs',{'playlistId':$(this).closest('.dz-playlist-item').data('id')}),function(response){
 			if(response.success == true){
 				musicPlayer.removeAllSongs();
 				musicPlayer.addSongs(response.data.tracks);
                 musicPlayer.play();
 			}else{
-				loggerDeezer.debug('Error with grooveshark');
+				loggerDeezer.debug('Error with deezer');
 			}
 		},'json');
 		return false;
