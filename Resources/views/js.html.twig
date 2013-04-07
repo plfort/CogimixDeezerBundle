@@ -1,0 +1,33 @@
+<div id="dz-root"></div>
+<script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
+
+{% javascripts
+        '@CogimixDeezerBundle/Resources/public/js/plugin-deezer.js'
+
+filter="?yui_js"%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+var loggerDeezer = JSLog.Register('CogimixDeezer');
+
+DZ.init({
+		appId  : '115311',
+		channelUrl : '{{ url('_deezer_channel') }}',
+		player : {
+			onload : function(){
+				loggerDeezer.debug('deezer player loaded');
+
+				}
+		}
+	});
+DZ.getLoginStatus(function(response) {
+	  if (response.authResponse) {
+		  loggerDeezer.debug('User is logged');
+		  loggerDeezer.debug(response.authResponse);
+		// logged in and connected user, someone you know
+	  } else {
+		// no user session available, someone you dont know
+	  }
+	});
+
+</script>

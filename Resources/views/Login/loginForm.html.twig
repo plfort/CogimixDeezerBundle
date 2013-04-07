@@ -1,0 +1,10 @@
+{% if error is defined %}
+<div class="alert alert-error">{{ error }}</div>
+{% endif %}
+<div>
+You login and password are not stored in database.
+</div>
+<form action="{{ path('_grooveshark_login')  }}" action="POST">
+  {{ form_row(form) }}
+  <input type="submit" class="btn"  value="Login" />
+</form>
