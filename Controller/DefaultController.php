@@ -4,7 +4,7 @@ namespace Cogipix\CogimixDeezerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Cogipix\CogimixCommonBundle\Controller\AbstractController;
+
 
 use Cogipix\CogimixDeezerBundle\Entity\DeezerToken;
 
@@ -20,7 +20,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
  * @author plfort - Cogipix
  *
  */
-class DefaultController extends AbstractController
+class DefaultController extends Controller
 {
     /**
      * @Route("/channel",name="_deezer_channel")

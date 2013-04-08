@@ -24,6 +24,11 @@
                 <tag name="cogimix.menu_renderer"/>
            </service>
            
+           <service id="deezer_music.widget_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Widget\WidgetRenderer">
+               <argument type="string">%deezer.api.key%</argument>
+                <tag name="cogimix.widget_renderer"/>
+           </service>
+           
            <service id="deezer_music.playlist_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Playlist\PlaylistRenderer">
                 <argument type="service" id="doctrine.orm.entity_manager" />
                 <argument type="service" id="deezer_music.api" />

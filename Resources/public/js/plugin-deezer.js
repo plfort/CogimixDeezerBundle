@@ -5,6 +5,7 @@ this.musicPlayer = musicPlayer;
 this.currentState = null;
 this.currentSoundObject=null;
 this.currentDuration=0;
+this.widgetElement =$("#deezerWidgetContainer");
 var self = this;
 
 DZ.Event.subscribe('player_paused', function(evt_name){
