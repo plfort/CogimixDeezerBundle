@@ -2,6 +2,8 @@
 
 namespace Cogipix\CogimixDeezerBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -27,7 +29,13 @@ class DefaultController extends Controller
      */
     public function getChannelAction()
     {
-        return $this->render('CogimixDeezerBundle::channel.html.twig');
+        $maxage= 60*60*24*360;
+        $response = new Response();
+        $response->headers->set('Pragma','public');
+        $response->headers->set('Cache-Control','maxage='.$maxage);
+        $response->headers->set('Expires',gmdate('D, d M Y H:i:s', time()+$maxage) . ' GMT');
+        $response->setContent($this->renderView('CogimixDeezerBundle::channel.html.twig'));
+        return $response;
     }
 
     /**

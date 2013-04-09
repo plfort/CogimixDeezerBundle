@@ -14,15 +14,12 @@ class DeezerApi
     private $apiUrl = "https://api.deezer.com/2.0";
 
     private $deezerToken;
-   // private $CACertPath = __DIR__."/Equifax_Secure_CA.pem";
-
 
     private $CURL_OPTS = array(
 
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => false,
-            CURLOPT_SSL_VERIFYPEER=>true,
-            CURLOPT_SSL_VERIFYHOST=>1,
+
    );
 
     private $apiMethods =array(
@@ -31,13 +28,6 @@ class DeezerApi
             'USERPLAYLISTS'=>'/user/me/playlists',
             'PLAYLIST'=>'/playlist');
 
-    public function __construct(){
-        $this->CURL_OPTS[  CURLOPT_CAINFO ] =  $this->getCAPath();
-    }
-
-    private function getCAPath(){
-        return __DIR__."/Equifax_Secure_CA.pem";
-    }
 
     protected function callApi($urlPart){
         $c = curl_init($this->apiUrl.$urlPart);

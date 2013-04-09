@@ -21,7 +21,10 @@ DZ.Event.subscribe('player_play', function(evt_name){
 });
 
 DZ.Event.subscribe('player_position', function(args,evt_name){
-	console.log(args);
+	loggerDeezer.debug(args);
+	if(args[0]>=(args[1]-1)){
+		self.musicPlayer.next();
+	}
 	if(self.musicPlayer.cursor.data('isdragging')==false){
 		  self.musicPlayer.cursor.slider("value", args[0]*1000);
 		}
