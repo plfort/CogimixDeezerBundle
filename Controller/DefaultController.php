@@ -25,7 +25,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/channel{_query}",name="_deezer_channel",requirements={"_query"="([a-zA-Z0-9=&]+)?"})
+     * @Route("/channel{_query}",name="_deezer_channel",requirements={"_query"="([a-zA-Z0-9=&]+)?"},defaults={"_query"=""})
      */
     public function getChannelAction()
     {
