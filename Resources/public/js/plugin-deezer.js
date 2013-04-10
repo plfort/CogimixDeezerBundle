@@ -21,7 +21,7 @@ DZ.Event.subscribe('player_play', function(evt_name){
 });
 
 DZ.Event.subscribe('player_position', function(args,evt_name){
-	loggerDeezer.debug(args);
+
 	if(args[0]>=(args[1]-1)){
 		self.musicPlayer.next();
 	}
@@ -38,7 +38,7 @@ DZ.Event.subscribe('current_track', function(args, evt_name){
 });
 
 this.play = function(item) {
-	
+	self.setVolume(self.musicPlayer.volume);
 	DZ.player.playTracks([item.entryId], 0, function(response){
 		
 	});
@@ -58,6 +58,12 @@ this.resume = function(){
 	loggerDeezer.debug('call resume deezer');
 	DZ.player.play();
 }
+
+this.setVolume = function(value){
+	loggerDeezer.debug('call setvolume deezer');
+	DZ.player.setVolume(value);
+}
+
 }
 
 $(document).ready(function(){
