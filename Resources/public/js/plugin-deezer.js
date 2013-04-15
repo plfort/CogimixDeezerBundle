@@ -1,5 +1,6 @@
 function deezerPlayer(musicPlayer){
 this.name = "Deezer";
+this.cancelRequested=false;
 this.interval;
 this.musicPlayer = musicPlayer;
 this.currentState = null;
@@ -8,12 +9,17 @@ this.currentDuration=0;
 this.widgetElement =$("#deezerWidgetContainer");
 var self = this;
 
+this.requestCancel=function(){
+	self.cancelRequested=true;
+};
+
 DZ.Event.subscribe('player_paused', function(evt_name){
 	self.musicPlayer.unbinCursorStop();
 });
 
 DZ.Event.subscribe('player_play', function(evt_name){
 	self.musicPlayer.enableControls();
+	
 	self.musicPlayer.bindCursorStop(function(value) {
 		  
 		DZ.player.seek(value*100/self.currentDuration);
