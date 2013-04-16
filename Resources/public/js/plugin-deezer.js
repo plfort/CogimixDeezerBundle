@@ -72,6 +72,10 @@ this.setVolume = function(value){
 
 }
 
+$("body").on('musicplayerReady',function(event){
+	event.musicPlayer.addPlugin('dz',new deezerPlayer(event.musicPlayer));
+});
+
 $(document).ready(function(){
 
 	$.get('bundles/cogimixdeezer/js/template/track.html',function(html){
