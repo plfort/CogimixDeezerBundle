@@ -77,10 +77,6 @@ $("body").on('musicplayerReady',function(event){
 });
 
 $(document).ready(function(){
-
-	$.get('bundles/cogimixdeezer/js/template/track.html',function(html){
-		tplFiles['trackDz']=html;
-	},'text');
 	
 	$(document).on('click','#loginGroovesharkBtn',function(event){
 		$("#modalLoginGroovehsark").modal("toggle");
@@ -92,9 +88,8 @@ $(document).ready(function(){
 		var playlistAlias = playlistElement.data('alias');
 		$.get(Routing.generate('_deezer_playlist_songs',{'playlistId':playlistElement.data('id')}),function(response){
 			if(response.success == true){
-				renderResult(response.data.tracks,{tpl:'trackDz',tabName:playlistName,alias:playlistAlias});
+				renderResult(response.data.tracks,{tpl:'trackNoSortTpl',tabName:playlistName,alias:playlistAlias});
             	$("#wrap").animate({scrollTop:0});
-	
 			}else{
 				loggerDeezer.debug('Error with deezer');
 			}
@@ -151,8 +146,6 @@ $(document).ready(function(){
 		
    	    return false;
 	});
-
-
     $(".dz-playlist-item").draggable(draggableOptionsPlaylistListItem);
 });
 
