@@ -2,7 +2,7 @@
 {% if playlists is not empty %}
 <li><img class="playlist-icon" src="{{ asset('bundles/cogimixdeezer/images/deezer-icon.png') }}"/><a data-toggle="collapse"  href="#dz-playlist-list"> Deezer</a></li>
 {% endif %}
-<ul id="dz-playlist-list" class="collapse out">
+<ul id="dz-playlist-list" class="subPlaylist collapse out">
 {% if playlists is not empty %}
     {% for item in playlists %}
         {% include 'CogimixDeezerBundle:Playlist:item.html.twig' %}

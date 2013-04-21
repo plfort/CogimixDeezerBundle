@@ -32,14 +32,14 @@ DZ.Event.subscribe('player_position', function(args,evt_name){
 		self.musicPlayer.next();
 	}
 	if(self.musicPlayer.cursor.data('isdragging')==false){
-		  self.musicPlayer.cursor.slider("value", args[0]*1000);
+		  self.musicPlayer.cursor.slider("value", args[0]);
 		}
 });
 
 DZ.Event.subscribe('current_track', function(args, evt_name){
 	loggerDeezer.debug('current trask changed');
 	
-	self.currentDuration=args.track.duration*1000;
+	self.currentDuration=args.track.duration;
 	 self.musicPlayer.cursor.slider("option", "max", self.currentDuration).progressbar();
 });
 
