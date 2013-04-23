@@ -8,9 +8,9 @@ use Cogipix\CogimixCommonBundle\MusicSearch\AbstractMusicSearch;
 class DeezerMusicSearch extends AbstractMusicSearch
 {
 
-   private $baseUrl = 'http://api.deezer.com/2.0/search?q=';
+   private $baseUrl = 'https://api.deezer.com/2.0/search?q=';
    private $resutBuilder;
-    private $CURL_OPTS = array(
+   private $CURL_OPTS = array(
             CURLOPT_CONNECTTIMEOUT => 10,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 20,
@@ -53,18 +53,11 @@ class DeezerMusicSearch extends AbstractMusicSearch
 
     protected function executeQuery()
     {
-        //echo $this->baseUrl;die();
+
         $c = curl_init($this->baseUrl);
-        /* On indique à curl quelle url on souhaite télécharger */
-       //echo $this->serializer->serialize($this->searchQuery);die();
 
         curl_setopt_array($c, $this->CURL_OPTS);
-
-        /* On execute la requete */
         $output = curl_exec($c);
-
-        //echo $output;die();
-        /* On a une erreur alors on la lève */
         if ($output === false) {
             $this->logger->err(curl_error($c));
 
@@ -77,7 +70,6 @@ class DeezerMusicSearch extends AbstractMusicSearch
 
     protected function buildQuery()
     {
-        //$this->logger->info($this->searchQuery);
 
         if($this->searchQuery){
           $this->baseUrl.=$this->searchQuery->getSongQuery();

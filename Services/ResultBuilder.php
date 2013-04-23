@@ -16,18 +16,49 @@ class ResultBuilder{
             $track->setArtist($deezerTrack['artist']['name']);
             $track->setTitle($deezerTrack['title']);
             $track->setTag($this->getResultTag());
-            $track->setThumbnails($deezerTrack['album']['cover'].'?size=small');
+            if(isset($deezerTrack['album']) && isset($deezerTrack['album']['cover'])){
+                $track->setThumbnails($deezerTrack['album']['cover'].'?size=small');
+            }else{
+                $track->setThumbnails($this->getDefaultIcon());
+            }
             $track->setIcon($this->getDefaultIcon());
 
         }
         return $track;
     }
 
+    public function createFromDeezerAlbum($deezerAlbum){
+        $cover = $deezerAlbum['cover'].'?size=small';
+        $tracks= array();
+        if(isset($deezerAlbum['tracks']) && isset($deezerAlbum['tracks']['data'])){
+            $tracks= $this->createArrayFromDeezerTracks($deezerAlbum['tracks']['data']);
+        }
+        return $tracks;
+    }
+
+    public function createFromDeezerPlaylist($deezerPlaylist){
+
+        $tracks= array();
+        if(isset($deezerPlaylist['tracks']) && isset($deezerPlaylist['tracks']['data'])){
+            $tracks= $this->createArrayFromDeezerTracks($deezerPlaylist['tracks']['data']);
+        }
+        return $tracks;
+    }
+
     public function createArrayFromDeezerTracks($deezerTracks){
-        $count=count($deezerTracks);
+
         $tracks = array();
-        for($i=0;$i<$count;$i++){
-            $track = $this->createFromDeezerTrack($deezerTracks[$i]);
+        if(is_array($deezerTracks)){
+            $count=count($deezerTracks);
+            $tracks = array();
+            for($i=0;$i<$count;$i++){
+                $track = $this->createFromDeezerTrack($deezerTracks[$i]);
+                if($track!=null){
+                    $tracks[]=$track;
+                }
+            }
+        }else{
+            $track = $this->createFromDeezerTrack($deezerTracks);
             if($track!=null){
                 $tracks[]=$track;
             }

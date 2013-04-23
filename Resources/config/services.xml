@@ -19,6 +19,11 @@
                 <tag name="cogimix.jsimport_renderer"/>
            </service>
            
+           <service id="deezer_music.url_search" class="Cogipix\CogimixDeezerBundle\Services\DeezerUrlSearch">
+               <argument type="service" id="deezer_music.result_builder"/>
+      
+                <tag name="cogimix.url_search" />
+           </service>
            
            <service id="deezer_music.menu_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Menu\MenuRenderer">
                 <tag name="cogimix.menu_renderer"/>
