@@ -39,7 +39,7 @@ DZ.Event.subscribe('player_play', function(evt_name){
 });
 
 DZ.Event.subscribe('player_position', function(args,evt_name){
-	console.log(args);
+	
 	loggerDeezer.debug('player_position');
 	
 	if(args[0]==(args[1]-2)){
