@@ -1,7 +1,7 @@
 <?php
 namespace Cogipix\CogimixDeezerBundle\Entity;
 use Cogipix\CogimixCommonBundle\Entity\User;
-
+use JMS\Serializer\Annotation as JMSSerializer;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
@@ -21,6 +21,7 @@ class DeezerToken
     /**
      * @ORM\OneToOne(targetEntity="Cogipix\CogimixCommonBundle\Entity\User")
      * @var User $user
+     * @JMSSerializer\Exclude()
      */
 
     protected $user;
