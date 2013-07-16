@@ -9,6 +9,7 @@ class DeezerMusicSearch extends AbstractMusicSearch
 {
 
    private $baseUrl = 'https://api.deezer.com/2.0/search?q=';
+   private $popularUrl = 'https://api.deezer.com/2.0/search?q=&order=RANKING';
    private $resutBuilder;
    private $CURL_OPTS = array(
             CURLOPT_CONNECTTIMEOUT => 10,
@@ -29,20 +30,7 @@ class DeezerMusicSearch extends AbstractMusicSearch
 
        if(isset($output['data'])){
            $tracks=$this->resutBuilder->createArrayFromDeezerTracks($output['data']);
-//            foreach($output['data'] as $item){
-//                if($item['readable']==true){
 
-//                    $track = new TrackResult();
-//                    $track->setId($item['id']);
-//                    $track->setEntryId($item['id']);
-//                    $track->setArtist($item['artist']['name']);
-//                    $track->setTitle($item['title']);
-//                    $track->setTag($this->getResultTag());
-//                    $track->setThumbnails($item['album']['cover'].'?size=small');
-//                    $track->setIcon($this->getDefaultIcon());
-//                    $tracks[]=$track;
-//                }
-//            }
        }
         }catch(\Exception $ex){
             $this->logger->info($ex->getMessage());
@@ -65,6 +53,12 @@ class DeezerMusicSearch extends AbstractMusicSearch
         }
 
         return $this->parseResponse(json_decode($output,true));
+
+    }
+
+    protected function executePopularQuery(){
+
+      return array();
 
     }
 

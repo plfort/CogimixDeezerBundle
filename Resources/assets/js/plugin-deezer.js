@@ -1,3 +1,5 @@
+
+
 function deezerPlayer(musicPlayer){
 this.name = "Deezer";
 this.cancelRequested=false;
@@ -13,52 +15,8 @@ this.requestCancel=function(){
 	self.cancelRequested=true;
 };
 
-DZ.Event.subscribe('player_buffering', function(evt){
-	  self.musicPlayer.cursor.progressbar('value',evt);
-	  });
-
-DZ.Event.subscribe('player_paused', function(evt_name){
-	loggerDeezer.debug('player_paused');
-	self.musicPlayer.unbinCursorStop();
-});
 
 
-
-DZ.Event.subscribe('player_play', function(evt_name){
-	loggerDeezer.debug('player_play');
-	self.musicPlayer.enableControls();
-	
-	self.musicPlayer.bindCursorStop(function(value) {
-		
-		try{  
-			DZ.player.seek(value*100/self.currentDuration);
-		}catch(err){
-			loggerDeezer.error(err);
-		}
-    });
-});
-
-DZ.Event.subscribe('player_position', function(args,evt_name){
-	
-	loggerDeezer.debug('player_position');
-	
-	if(args[0]==(args[1]-2)){
-		setTimeout(function(){
-			self.pause();
-			self.musicPlayer.next();
-		},2000);
-		
-	}
-	if(self.musicPlayer.cursor.data('isdragging')==false){
-		  self.musicPlayer.cursor.slider("value", args[0]);
-		}
-});
-
-DZ.Event.subscribe('current_track', function(args, evt_name){
-	loggerDeezer.debug('current track change');
-	self.currentDuration=args.track.duration;
-	 self.musicPlayer.cursor.slider("option", "max", self.currentDuration).progressbar();
-});
 
 this.play = function(item) {
 	self.musicPlayer.cursor.progressbar();

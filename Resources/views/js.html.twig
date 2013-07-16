@@ -1,5 +1,5 @@
 <div id="dz-root"></div>
-<script src="https://cdns-files.deezer.com/js/min/dz.js"></script>
+
 {% javascripts
         '@CogimixDeezerBundle/Resources/assets/js/plugin-deezer.js'
         filter="?yui_js"%}
@@ -7,23 +7,80 @@
 {% endjavascripts %}
 <script>
 var loggerDeezer = JSLog.Register('CogimixDeezer');
-DZ.init({
-		appId  : '115311',
-		channelUrl : '{{ url('_deezer_channel') }}',
-		player : {
-			onload : function(){
-				loggerDeezer.debug('deezer player loaded');
 
-				}
-		}
-	});
-DZ.getLoginStatus(function(response) {
-	  if (response.authResponse) {
-		  loggerDeezer.debug('User is logged');
-		  loggerDeezer.debug(response.authResponse);
-		// logged in and connected user, someone you know
-	  } else {
-		// no user session available, someone you dont know
-	  }
-	});
+window.dzAsyncInit = function() {
+    DZ.init({
+    		appId  : '115311',
+    		channelUrl : '{{ url('_deezer_channel') }}',
+    		player : {
+    			onload : function(){
+    				loggerDeezer.debug('deezer player loaded');
+
+    				}
+    		}
+    	});
+    DZ.getLoginStatus(function(response) {
+  	  if (response.authResponse) {
+  		  loggerDeezer.debug('User is logged');
+  		  loggerDeezer.debug(response.authResponse);
+  		// logged in and connected user, someone you know
+  	  } else {
+  		// no user session available, someone you dont know
+  	  }
+  	});
+
+    DZ.Event.subscribe('player_buffering', function(evt){
+  	  self.musicPlayer.cursor.progressbar('value',evt);
+  	  });
+
+  DZ.Event.subscribe('player_paused', function(evt_name){
+  	loggerDeezer.debug('player_paused');
+  	self.musicPlayer.unbinCursorStop();
+  });
+
+
+
+  DZ.Event.subscribe('player_play', function(evt_name){
+  	loggerDeezer.debug('player_play');
+  	self.musicPlayer.enableControls();
+
+  	self.musicPlayer.bindCursorStop(function(value) {
+
+  		try{
+  			DZ.player.seek(value*100/self.currentDuration);
+  		}catch(err){
+  			loggerDeezer.error(err);
+  		}
+      });
+  });
+
+  DZ.Event.subscribe('player_position', function(args,evt_name){
+
+  	loggerDeezer.debug('player_position');
+
+  	if(args[0]==(args[1]-2)){
+  		setTimeout(function(){
+  			self.pause();
+  			self.musicPlayer.next();
+  		},2000);
+
+  	}
+  	if(self.musicPlayer.cursor.data('isdragging')==false){
+  		  self.musicPlayer.cursor.slider("value", args[0]);
+  		}
+  });
+
+  DZ.Event.subscribe('current_track', function(args, evt_name){
+  	loggerDeezer.debug('current track change');
+  	self.currentDuration=args.track.duration;
+  	 self.musicPlayer.cursor.slider("option", "max", self.currentDuration).progressbar();
+  });
+
+};
+(function() {
+	var e = document.createElement('script');
+	e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
+	e.async = true;
+	document.getElementById('dz-root').appendChild(e);
+  }());
 </script>
