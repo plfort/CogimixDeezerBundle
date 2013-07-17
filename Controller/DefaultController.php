@@ -51,7 +51,7 @@ class DefaultController extends Controller
 
         if($deezerAuthResponse!==null && $deezerUserId !==null ){
             $user = $this->getUser();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $deezerToken = $em->getRepository('CogimixDeezerBundle:DeezerToken')->findOneByUser($this->getUser());
             if($deezerToken!==null){
                 $deezerToken->setDateCreated(new \DateTime());
@@ -86,7 +86,7 @@ class DefaultController extends Controller
     public function logoutAction(Request $request)
     {
         $response = new AjaxResult();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $user=$this->getUser();
         $deezerToken = $em->getRepository('CogimixDeezerBundle:DeezerToken')->findOneByUser($user);
         $user->removeRole('ROLE_DEEZER');
@@ -106,7 +106,7 @@ class DefaultController extends Controller
      */
     public function getPlaylistTracksAction($playlistId){
             $response = new AjaxResult();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $user=$this->getUser();
             $deezerToken = $em->getRepository('CogimixDeezerBundle:DeezerToken')->findOneByUser($user);
             $deezerApi = $this->get('deezer_music.api');
