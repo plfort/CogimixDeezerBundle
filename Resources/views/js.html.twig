@@ -7,24 +7,28 @@
 {% endjavascripts %}
 <script>
 var loggerDeezer = JSLog.Register('CogimixDeezer');
-
+var deferredDeezerload = $.Deferred();
 window.dzAsyncInit = function() {
+
     DZ.init({
     		appId  : '115311',
     		channelUrl : '{{ url('_deezer_channel') }}',
     		player : {
     			onload : function(){
     				loggerDeezer.debug('deezer player loaded');
-
+    				deferredDeezerload.resolve();
     				}
     		}
     	});
-    //initCogimixDeezer();
 
+    return deferredDeezerload.promise();
 
 };
 
 $(document).ready(function() {
+	$.when(deferredDeezerload,deferredDeezerPluginReady.promise()).done(function(){
+		addDeezerPlugin();
+		});
 	var e = document.createElement('script');
 	e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
 	e.async = true;

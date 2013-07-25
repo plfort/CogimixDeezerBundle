@@ -1,4 +1,4 @@
-
+var deferredDeezerPluginReady = $.Deferred();
 var nextDeezerTimeout = null;
 
 function initCogimixDeezer(){
@@ -115,8 +115,13 @@ this.setVolume = function(value){
 }
 
 $("body").on('musicplayerReady',function(event){
-	event.musicPlayer.addPlugin('dz',new deezerPlayer(event.musicPlayer));
+	
+	deferredDeezerPluginReady.resolve();
 });
+
+function addDeezerPlugin(){
+	musicPlayer.addPlugin('dz',new deezerPlayer(musicPlayer));
+}
 
 $(document).ready(function(){
 	
