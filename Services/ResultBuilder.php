@@ -72,6 +72,6 @@ class ResultBuilder{
     }
 
     public function getDefaultIcon(){
-        return 'bundles/cogimixdeezer/images/deezer-icon.png';
+        return '/bundles/cogimixdeezer/images/deezer-icon.png';
     }
 }

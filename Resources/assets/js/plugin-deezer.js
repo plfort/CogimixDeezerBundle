@@ -196,7 +196,7 @@ $(document).ready(function(){
     $(".dz-playlist-item").draggable(draggableOptionsPlaylistListItem);
 });
 
-iconMap['dz'] = 'bundles/cogimixdeezer/images/deezer-icon.png';
+iconMap['dz'] = '/bundles/cogimixdeezer/images/deezer-icon.png';
 droppedHookArray['dz-playlist'] = function(droppedItem,callback){
 		var playlistId=droppedItem.data('id');
 		$.get(Routing.generate('_deezer_playlist_songs',{'playlistId':playlistId}),function(response){

@@ -1,9 +1,9 @@
 {% spaceless %}
-<li id="deezer-menu" class="dropdown-submenu">
+<li id="deezer-menu">
     <a href="#">Deezer</a>
-    <ul class="dropdown-menu">
+    <ul>
     {% if not is_granted('ROLE_DEEZER') %}
-    <li>{% include 'CogimixDeezerBundle:Login:loginLink.html.twig' %}</li>
+         <li>{% include 'CogimixDeezerBundle:Login:loginLink.html.twig' %}</li>
     {% else %}
          <li>{% include 'CogimixDeezerBundle:Login:logoutLink.html.twig' %}</li>
     {% endif %}
