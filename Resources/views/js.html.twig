@@ -9,7 +9,7 @@
 var loggerDeezer = JSLog.Register('CogimixDeezer');
 var deferredDeezerload = $.Deferred();
 window.dzAsyncInit = function() {
-
+	DZ.override_https();
     DZ.init({
     		appId  : '115311',
     		channelUrl : '{{ url('_deezer_channel') }}',
