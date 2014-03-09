@@ -25,8 +25,8 @@
                 <tag name="cogimix.url_search" />
            </service>
            
-           <service id="deezer_music.menu_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Menu\MenuRenderer">
-                <tag name="cogimix.menu_renderer"/>
+           <service id="deezer_music.menu_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Menu\MenuItem">
+                <tag name="cogimix.menu_item"/>
            </service>
            
            <service id="deezer_music.widget_renderer" class="Cogipix\CogimixDeezerBundle\ViewHooks\Widget\WidgetRenderer">
