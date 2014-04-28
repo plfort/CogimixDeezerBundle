@@ -114,17 +114,17 @@ this.setVolume = function(value){
 
 }
 
-$("body").on('musicplayerReady',function(event){
-	
-	deferredDeezerPluginReady.resolve();
-});
+
 
 function addDeezerPlugin(){
 	musicPlayer.addPlugin('dz',new deezerPlayer(musicPlayer));
 }
 
 $(document).ready(function(){
-	
+	$("body").on('musicplayerReady',function(event){
+		
+		deferredDeezerPluginReady.resolve();
+	});
 	$(document).on('click','#loginGroovesharkBtn',function(event){
 		$("#modalLoginGroovehsark").modal("toggle");
 	});
