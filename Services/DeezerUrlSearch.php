@@ -62,7 +62,7 @@ class DeezerUrlSearch implements UrlSearcherInterface
             }
 
             $output = json_decode($outputJson,true);
-            //var_dump($output);die();
+           
             switch($type){
                 case 'album': return  $this->resultBuilder->createFromDeezerAlbum($output);break;
                 case 'artist': return  $this->resultBuilder->createArrayFromDeezerTracks($output['data']);break;

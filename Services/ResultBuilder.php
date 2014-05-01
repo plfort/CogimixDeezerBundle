@@ -16,6 +16,7 @@ class ResultBuilder{
             $track->setArtist($deezerTrack['artist']['name']);
             $track->setTitle($deezerTrack['title']);
             $track->setTag($this->getResultTag());
+            $track->setDuration($deezerTrack['duration']);
             if(isset($deezerTrack['album']) && isset($deezerTrack['album']['cover'])){
                 $track->setThumbnails($deezerTrack['album']['cover'].'?size=94x94');
             }else{

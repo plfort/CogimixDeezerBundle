@@ -25,6 +25,7 @@ class DeezerApi
     private $apiMethods =array(
             'SEARCH'=>'/search',
             'USERINFO'=>'/user/me',
+            'TRACK'=>'/track',
             'USERPLAYLISTS'=>'/user/me/playlists',
             'PLAYLIST'=>'/playlist');
 
@@ -82,6 +83,12 @@ class DeezerApi
         $result= $this->callApi($urlPart);
     }
 
+    public function getTrackInfo($id){
+        $urlPart = $this->apiMethods['TRACK'].'/'.$id;
+        $result= $this->callApi($urlPart);
+        return $result;
+    }
+    
 
     public function getDeezerToken()
     {
