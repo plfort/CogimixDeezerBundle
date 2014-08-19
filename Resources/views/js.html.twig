@@ -5,9 +5,9 @@
         filter="?yui_js"%}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
-<script>
+<script type="text/javascript">
 var loggerDeezer = JSLog.Register('CogimixDeezer');
-var deferredDeezerload = $.Deferred();
+
 window.dzAsyncInit = function() {
 	DZ.override_https();
     DZ.init({
@@ -16,22 +16,21 @@ window.dzAsyncInit = function() {
     		player : {
     			onload : function(){
     				loggerDeezer.debug('deezer player loaded');
-    				deferredDeezerload.resolve();
+    				addDeezerPlugin();
     				}
     		}
     	});
 
-    return deferredDeezerload.promise();
+
 
 };
 
-$(document).ready(function() {
-	$.when(deferredDeezerload,deferredDeezerPluginReady.promise()).done(function(){
-		addDeezerPlugin();
-		});
+function loadDeezer(callbackReady){
 	var e = document.createElement('script');
-	e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
-	e.async = true;
-	document.getElementById('dz-root').appendChild(e);
-  }());
+    e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
+    e.async = true;
+    document.getElementById('dz-root').appendChild(e);
+
+}
+
 </script>
