@@ -8,29 +8,33 @@
 <script type="text/javascript">
 var loggerDeezer = JSLog.Register('CogimixDeezer');
 
-window.dzAsyncInit = function() {
-	DZ.override_https();
-    DZ.init({
-    		appId  : '115311',
-    		channelUrl : '{{ url('_deezer_channel') }}',
-    		player : {
-    			onload : function(){
-    				loggerDeezer.debug('deezer player loaded');
-    				addDeezerPlugin();
-    				}
-    		}
-    	});
 
 
 
-};
+function loadDeezer(){
+	var deezerloadedDeferred = $.Deferred();
+	window.dzAsyncInit = function() {
+		DZ.override_https();
+	    DZ.init({
+	    		appId  : '115311',
+	    		channelUrl : '{{ url('_deezer_channel') }}',
+	    		player : {
+	    			onload : function(){
+	    				loggerDeezer.debug('deezer player loaded');
+	    				
+	    				deezerloadedDeferred.resolve();
+	    				}
+	    		}
+	    	});
 
-function loadDeezer(callbackReady){
+	};
+
+	
 	var e = document.createElement('script');
     e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
     e.async = true;
     document.getElementById('dz-root').appendChild(e);
-
+    return deezerloadedDeferred.promise();
 }
 
 </script>
