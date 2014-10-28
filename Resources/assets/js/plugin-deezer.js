@@ -1,4 +1,3 @@
-var deferredDeezerPluginReady = $.Deferred();
 var nextDeezerTimeout = null;
 
 function initCogimixDeezer() {
