@@ -67,4 +67,9 @@ class PlaylistRenderer implements PlaylistRendererInterface,
     public function getTag(){
         return 'deezer';
     }
+
+    public function getRenderPlaylistsParameters()
+    {
+        return array('playlists'=>$this->getPlaylists());
+    }
 }
