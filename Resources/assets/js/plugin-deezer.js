@@ -156,10 +156,6 @@ $(document).ready(
 				});
 			}
 
-			$(document).on('click', '#loginGroovesharkBtn', function(event) {
-				$("#modalLoginGroovehsark").modal("toggle");
-			});
-
 			$("#playlist-container").on(
 					'click',
 					'.showPlaylistDeezerBtn',
