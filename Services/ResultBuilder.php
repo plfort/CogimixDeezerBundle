@@ -1,7 +1,7 @@
 <?php
 namespace Cogipix\CogimixDeezerBundle\Services;
 
-use Cogipix\CogimixCommonBundle\Entity\TrackResult;
+use Cogipix\CogimixCommonBundle\Entity\Song;
 
 class ResultBuilder{
 
@@ -10,7 +10,7 @@ class ResultBuilder{
         $track=null;
 
         if($deezerTrack['readable']==true){
-            $track = new TrackResult();
+            $track = new Song();
             $track->setId($deezerTrack['id']);
             $track->setEntryId($deezerTrack['id']);
             $track->setArtist($deezerTrack['artist']['name']);

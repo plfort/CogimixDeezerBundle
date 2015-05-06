@@ -1,6 +1,5 @@
 <?php
 namespace Cogipix\CogimixDeezerBundle\lib;
-use Cogipix\CogimixDeezerBundle\Model\DeezerTrack;
 
 use Cogipix\CogimixDeezerBundle\Model\DeezerPlaylist;
 

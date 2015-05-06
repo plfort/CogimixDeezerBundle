@@ -1,7 +1,6 @@
 <?php
 namespace Cogipix\CogimixDeezerBundle\Services;
 
-use Cogipix\CogimixCommonBundle\Entity\TrackResult;
 
 use Cogipix\CogimixCommonBundle\MusicSearch\AbstractMusicSearch;
 
