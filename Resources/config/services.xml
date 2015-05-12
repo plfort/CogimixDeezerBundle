@@ -38,7 +38,7 @@
                 <argument type="service" id="doctrine.orm.entity_manager" />
                 <argument type="service" id="deezer_music.api" />
                 <tag name="cogimix.playlist_renderer"/>
-                <tag name="securitycontext_aware"/>
+                <tag name="tokenstorage_aware"/>
            </service>
            
            <service id="cogimix.deezer.event_listener.authenticate" class="Cogipix\CogimixDeezerBundle\EventListener\AuthenticationListener">

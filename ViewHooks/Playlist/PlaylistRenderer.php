@@ -2,11 +2,11 @@
 namespace Cogipix\CogimixDeezerBundle\ViewHooks\Playlist;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
-use Cogipix\CogimixCommonBundle\Utils\SecurityContextAwareInterface;
+use Cogipix\CogimixCommonBundle\Utils\TokenStorageAwareInterface;
 
 use Cogipix\CogimixCommonBundle\ViewHooks\Playlist\PlaylistRendererInterface;
 /**
@@ -15,11 +15,11 @@ use Cogipix\CogimixCommonBundle\ViewHooks\Playlist\PlaylistRendererInterface;
  *
  */
 class PlaylistRenderer implements PlaylistRendererInterface,
-        SecurityContextAwareInterface
+        TokenStorageAwareInterface
 {
 
     private $deezerApi;
-    private $securityContext;
+    private $tokenStorage;
     private $om;
 
 
@@ -48,15 +48,15 @@ class PlaylistRenderer implements PlaylistRendererInterface,
 
         return array();
     }
-    public function setSecurityContext(
-            SecurityContextInterface $securityContext)
+    public function setTokenStorage(
+            TokenStorageInterface $tokenStorage)
     {
-       $this->securityContext=$securityContext;
+       $this->tokenStorage=$tokenStorage;
 
     }
 
     protected function getCurrentUser() {
-        $user = $this->securityContext->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
         if ($user instanceof AdvancedUserInterface){
             return $user;
         }

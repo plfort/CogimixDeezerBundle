@@ -70,7 +70,7 @@ class DefaultController extends Controller
             $user->addRole('ROLE_DEEZER');
             $em->flush();
             $response->setSuccess(true);
-            $this->get('security.context')->getToken()->setAuthenticated(false);
+            $this->get('security.token_storage')->getToken()->setAuthenticated(false);
             $playlistRenderer = $this->get('deezer_music.playlist_renderer');
             $response->addData('playlistsHtml', $this->renderView($playlistRenderer->getListTemplate(),array('playlists'=>$playlistRenderer->getPlaylists())));
             $response->setHtml($this->renderView('CogimixDeezerBundle:Login:logoutLink.html.twig'));
@@ -90,7 +90,7 @@ class DefaultController extends Controller
         $user=$this->getUser();
         $deezerToken = $em->getRepository('CogimixDeezerBundle:DeezerToken')->findOneByUser($user);
         $user->removeRole('ROLE_DEEZER');
-        $this->get('security.context')->getToken()->setAuthenticated(false);
+        $this->get('security.token_storage')->getToken()->setAuthenticated(false);
         if($deezerToken!==null){
             $em->remove($deezerToken);
         }
