@@ -13,10 +13,10 @@ class DeezerMusicSearch extends AbstractMusicSearch
    private $CURL_OPTS = array(
             CURLOPT_CONNECTTIMEOUT => 10,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 20,
+            CURLOPT_TIMEOUT => 10,
             );
 
-    public function __construct($resutBuilder)
+    public function __construct(ResultBuilder $resutBuilder)
     {
         $this->resutBuilder=$resutBuilder;
     }
@@ -32,7 +32,7 @@ class DeezerMusicSearch extends AbstractMusicSearch
 
        }
         }catch(\Exception $ex){
-            $this->logger->info($ex->getMessage());
+            $this->logger->error($ex);
             return array();
         }
         return $tracks;
@@ -46,7 +46,7 @@ class DeezerMusicSearch extends AbstractMusicSearch
         curl_setopt_array($c, $this->CURL_OPTS);
         $output = curl_exec($c);
         if ($output === false) {
-            $this->logger->err(curl_error($c));
+            $this->logger->error(curl_error($c));
 
             return array();
         }
