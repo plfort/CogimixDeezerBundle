@@ -2,6 +2,9 @@
 
 namespace Cogipix\CogimixDeezerBundle\Controller;
 
+use Cogipix\CogimixCommonBundle\Entity\Playlist;
+use Cogipix\CogimixCommonBundle\Model\PlaylistConstant;
+use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -112,9 +115,10 @@ class DefaultController extends Controller
             $deezerApi = $this->get('deezer_music.api');
             $deezerApi->setDeezerToken($deezerToken);
             $tracks= $deezerApi->getCurrentUserPlaylistTracks($playlistId);
-
+            $deezerTracks = $this->get('deezer_music.result_builder')->createArrayFromDeezerTracks($tracks);
+            $songs = $this->get('cogimix.song_manager')->insertAndGetSongs($deezerTracks);
             $response->setSuccess(true);
-            $response->addData('tracks', $this->get('deezer_music.result_builder')->createArrayFromDeezerTracks($tracks));
-            return $response->createResponse();
+            $response->addData('tracks',$songs);
+            return $response->createResponse($this->get('jms_serializer'),['playlist_detail']);
     }
 }

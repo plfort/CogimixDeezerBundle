@@ -171,9 +171,10 @@ $(document).ready(
 								$pane.playlist.content.html(render(
 										'playlistExternalDetailSkeletonTpl', {
 											'playlist' : {
-												name : playlistName
-											},
-											'user' : currentUser
+                                                user : currentUser,
+												name : playlistName,
+                                                shared: false
+											}
 										}));
 								renderResult(response.data.tracks, {
 									tpl : 'trackNoSortTpl',
