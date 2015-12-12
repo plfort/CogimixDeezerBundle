@@ -38,7 +38,7 @@ class AuthenticationListener implements EventSubscriberInterface
                 $user->addRole('ROLE_DEEZER');
                 $event->getToken()->setAuthenticated(false);
             }
-            $this->om->flush();
+            $this->om->flush($user);
 
     }
 
