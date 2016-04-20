@@ -5,6 +5,7 @@ use JMS\Serializer\Annotation as JMSSerializer;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
+ * @ORM\Table(name="deezertoken")
  * @author plfort - Cogipix
  *
  */
@@ -14,7 +15,7 @@ class DeezerToken
     /**
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
